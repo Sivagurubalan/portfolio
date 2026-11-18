@@ -1,0 +1,141 @@
+---
+import { site } from "@/data/site";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = `${site.name} — ${site.role}`,
+  description = site.metaDescription,
+} = Astro.props;
+const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#121316" />
+    <link rel="icon" type="image/svg+xml" href={`${baseUrl}/favicon.svg`} />
+
+    <link
+      rel="preload"
+      href={`${baseUrl}/fonts/montserrat-latin-wght-normal.woff2`}
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
+
+    <meta property="og:title" content={`${site.name} — ${site.role}`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={`${baseUrl}/og.png`} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={`${site.name} Portfolio`} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json" is:inline set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Person",
+      name: site.name,
+      email: `mailto:${site.email}`,
+      jobTitle: site.role,
+      description,
+      knowsAbout: site.focus.map((area) => area.title),
+      sameAs: [site.githubUrl, site.linkedinUrl].filter(Boolean),
+    })} />
+  </head>
+  <body class="bg-[--background] px-6 sm:px-12 md:pl-28 md:pr-12 lg:pl-32 lg:pr-16 text-[var(--white)] selection:bg-[var(--sec)] selection:text-[#0d0e12]">
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  @font-face {
+    font-family: "Montserrat Variable";
+    src: url("/fonts/montserrat-latin-wght-normal.woff2")
+      format("woff2-variations");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  :root {
+    --background: #121316;
+    --sec: #a855f7;
+    --sec-2: #c084fc;
+    --sec-dark: #7e22ce;
+    --white: #f3f4f6;
+    --white-icon: #9ca3af;
+    --white-icon-tr: rgba(255, 255, 255, 0.08);
+    --component-bg: #181920;
+    --component-bg-hover: #1f212a;
+    --line: rgba(255, 255, 255, 0.08);
+  }
+
+  * {
+    font-family:
+      "Montserrat Variable",
+      -apple-system,
+      system-ui,
+      sans-serif;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background: var(--background);
+  }
+
+  *::selection {
+    background-color: var(--sec);
+    color: #0d0e12;
+  }
+
+  /* Scrollbar styles */
+
+  ::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #121316;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #252833;
+    border-radius: 8px;
+    border: 2px solid #121316;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--sec);
+  }
+
+  /* Scrollbar styles for Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #252833 var(--background);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>

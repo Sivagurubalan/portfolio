@@ -1,0 +1,43 @@
+---
+import { site } from "@/data/site";
+const { about } = site;
+---
+
+<section id="about" class="py-14 md:py-16 border-t border-[#ffffff10] text-[var(--white)]">
+  <div class="max-w-5xl mx-auto grid gap-8 lg:grid-cols-[1.3fr_1fr]">
+    <div>
+      <p class="text-xs uppercase tracking-[0.3em] text-[var(--sec)] mb-3">
+        07 — About
+      </p>
+      <h2 class="text-2xl md:text-4xl font-medium leading-snug text-pretty">
+        {about.lead}
+      </h2>
+      <div class="mt-5 space-y-4 text-sm md:text-base leading-relaxed text-[var(--white-icon)]">
+        {about.body.map((paragraph) => <p>{paragraph}</p>)}
+      </div>
+      <div
+        class="mt-6 rounded-2xl border border-[var(--sec)]/25 bg-[#181920] p-5 shadow-[0_8px_30px_rgba(0,0,0,0.4)]"
+      >
+        <p class="text-[10px] uppercase tracking-[0.2em] text-[var(--sec)]">
+          Building right now
+        </p>
+        <p class="mt-2 text-sm leading-relaxed text-[var(--white-icon)]">
+          {about.currently}
+        </p>
+      </div>
+    </div>
+
+    <dl class="self-start rounded-2xl border border-[var(--white-icon-tr)] bg-[#181920] divide-y divide-[#ffffff0d] shadow-[0_8px_30px_rgba(0,0,0,0.4)]">
+      {
+        about.facts.map((fact) => (
+          <div class="p-5">
+            <dt class="text-[10px] uppercase tracking-[0.2em] text-[#7d858d]">
+              {fact.label}
+            </dt>
+            <dd class="mt-1.5 text-sm text-[var(--white)]">{fact.value}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+</section>

@@ -1,0 +1,44 @@
+---
+import { site } from "@/data/site";
+---
+
+<section id="arsenal" class="py-14 md:py-16 border-t border-[#ffffff10] text-[var(--white)]">
+  <div class="max-w-5xl mx-auto">
+    <p class="text-xs uppercase tracking-[0.3em] text-[var(--sec)] mb-3">
+      05 — Technical arsenal
+    </p>
+    <h2 class="text-3xl md:text-5xl font-medium text-pretty">
+      Tools, grouped by what they build.
+    </h2>
+
+    <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {
+        site.arsenal.map((group, index) => (
+          <div class="rounded-2xl border border-[var(--white-icon-tr)] bg-[#181920] p-5 shadow-[0_8px_25px_rgba(0,0,0,0.3)]">
+            <div class="flex items-center justify-between">
+              <h3 class="text-sm font-semibold uppercase tracking-[0.15em]">
+                {group.title}
+              </h3>
+              <span class="font-mono text-[10px] text-[#6f767e]">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+            </div>
+            <ul class="mt-4 space-y-2">
+              {group.items.map((item) => (
+                <li class="flex items-start gap-2 text-sm text-[var(--white-icon)]">
+                  <span class="mt-2 size-1 shrink-0 rounded-full bg-[var(--sec)]" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+
+    <p class="mt-5 text-xs text-[#7d858d]">
+      Only what I can explain and demonstrate is listed here. Everything else is
+      still on the learning list, not the skill list.
+    </p>
+  </div>
+</section>

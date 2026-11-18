@@ -1,0 +1,299 @@
+---
+import { site, featuredProjects, supportingProjects } from "@/data/site";
+
+const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
+const filters = ["All", "AI", "Robotics", "IoT", "Web", "ML", "Hardware"];
+---
+
+<section id="work" class="py-14 md:py-16 border-t border-[#ffffff10] text-[var(--white)]">
+  <div class="max-w-5xl mx-auto">
+    <p class="text-xs uppercase tracking-[0.3em] text-[var(--sec)] mb-3">
+      02 — Selected work
+    </p>
+    <h2 class="text-3xl md:text-5xl font-medium text-pretty">Projects</h2>
+    <p class="mt-4 max-w-2xl text-sm md:text-base leading-relaxed text-[var(--white-icon)]">
+      Three flagship engineering builds, then the products and foundations behind
+      them. Every entry opens a case study with the problem, the architecture, the
+      tests and the limits that remain.
+    </p>
+
+    <div class="mt-7 flex flex-wrap gap-2" role="group" aria-label="Filter projects">
+      {
+        filters.map((filter) => (
+          <button
+            type="button"
+            data-filter={filter}
+            class:list={[
+              "filter-btn rounded-full border border-[var(--white-icon-tr)] px-4 py-1.5 text-xs uppercase tracking-wider text-[var(--white-icon)] transition hover:text-white",
+              filter === "All" && "is-active",
+            ]}
+          >
+            {filter}
+          </button>
+        ))
+      }
+      <span
+        class="ml-auto self-center text-xs text-[var(--white-icon)]"
+        data-count
+      ></span>
+    </div>
+
+    <div data-group class="mt-8 space-y-5">
+      {
+        featuredProjects.map((project, index) => (
+          <article
+            data-cats={project.cats.join(",")}
+            class="group grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] gap-5 rounded-3xl border border-[var(--white-icon-tr)] bg-[#181920] p-4 md:p-5 transition duration-300 hover:border-[var(--sec)]/40 shadow-[0_12px_40px_rgba(0,0,0,0.4)]"
+          >
+            <a
+              href={`${baseUrl}/work/${project.slug}`}
+              class="relative block overflow-hidden rounded-2xl border border-[#ffffff0d]"
+            >
+              <img
+                src={`${baseUrl}${project.image}`}
+                alt={`${project.title} cover`}
+                class="aspect-[16/10] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                loading={index === 0 ? "eager" : "lazy"}
+                decoding="async"
+              />
+              <span class="absolute top-3 left-3 rounded-full border border-[#ffffff1a] bg-[#121316cc] px-3 py-1 text-[10px] uppercase tracking-wider text-[var(--white)] backdrop-blur-md">
+                {project.status}
+              </span>
+            </a>
+
+            <div class="flex flex-col">
+              <div class="flex items-start justify-between gap-4">
+                <p class="text-[11px] uppercase tracking-[0.25em] text-[var(--sec)]">
+                  {project.kicker}
+                </p>
+                <span class="font-mono text-xs text-[#6f767e]">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+              </div>
+              <h3 class="mt-2 text-2xl md:text-3xl font-semibold">
+                {project.title}
+              </h3>
+              <p class="mt-3 text-sm leading-relaxed text-[var(--white-icon)]">
+                {project.summary}
+              </p>
+
+              <dl class="mt-4 space-y-3 border-t border-[#ffffff0d] pt-4 text-sm">
+                <div>
+                  <dt class="text-[10px] uppercase tracking-[0.2em] text-[#7d858d]">
+                    Problem
+                  </dt>
+                  <dd class="mt-1 leading-relaxed text-[var(--white-icon)]">
+                    {project.problem}
+                  </dd>
+                </div>
+                <div>
+                  <dt class="text-[10px] uppercase tracking-[0.2em] text-[#7d858d]">
+                    My contribution
+                  </dt>
+                  <dd class="mt-1 leading-relaxed text-[var(--white-icon)]">
+                    {project.contribution}
+                  </dd>
+                </div>
+              </dl>
+
+              <ul class="mt-4 flex flex-wrap gap-1.5">
+                {project.tech.map((tech) => (
+                  <li class="rounded border border-[#ffffff12] px-2 py-1 text-[10px] uppercase tracking-wider text-[var(--white-icon)]">
+                    {tech}
+                  </li>
+                ))}
+              </ul>
+
+              <div class="mt-auto flex flex-wrap items-center gap-3 pt-5">
+                <a
+                  href={`${baseUrl}/work/${project.slug}`}
+                  class="inline-flex items-center gap-2 rounded-full border border-[var(--sec)]/50 bg-[var(--sec)]/10 px-4 py-2 text-xs uppercase tracking-wider text-[var(--sec)] transition hover:bg-[var(--sec)]/20"
+                >
+                  View case study
+                  <span aria-hidden="true">→</span>
+                </a>
+                {project.codeUrl && (
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href={project.codeUrl}
+                    class="text-xs uppercase tracking-wider text-[var(--white-icon)] transition hover:text-white"
+                  >
+                    GitHub
+                  </a>
+                )}
+                {project.liveUrl && (
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href={project.liveUrl}
+                    class="text-xs uppercase tracking-wider text-[var(--white-icon)] transition hover:text-white"
+                  >
+                    Live demo ↗
+                  </a>
+                )}
+                {!project.codeUrl && !project.liveUrl && (
+                  <span class="text-xs uppercase tracking-wider text-[#5f666e]">
+                    Repository private
+                  </span>
+                )}
+              </div>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+
+    <div data-group class="mt-12">
+      <h3 class="text-lg font-semibold text-[var(--white)]">
+        Product &amp; engineering foundation
+      </h3>
+      <div class="mt-5 grid grid-cols-1 md:grid-cols-2 gap-5">
+        {
+          supportingProjects.map((project) => (
+            <article
+              data-cats={project.cats.join(",")}
+              class="group flex flex-col overflow-hidden rounded-2xl border border-[var(--white-icon-tr)] bg-[#181920] transition duration-300 hover:border-[var(--sec)]/40 shadow-[0_8px_30px_rgba(0,0,0,0.35)]"
+            >
+              <a
+                href={`${baseUrl}/work/${project.slug}`}
+                class="relative block overflow-hidden"
+              >
+                <img
+                  src={`${baseUrl}${project.image}`}
+                  alt={`${project.title} cover`}
+                  class="aspect-[16/9] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <span class="absolute top-3 left-3 rounded-full border border-[#ffffff1a] bg-[#121316cc] px-3 py-1 text-[10px] uppercase tracking-wider text-[var(--white)] backdrop-blur-md">
+                  {project.status}
+                </span>
+              </a>
+              <div class="flex flex-1 flex-col p-5">
+                <p class="text-[11px] uppercase tracking-[0.25em] text-[var(--sec)]">
+                  {project.kicker}
+                </p>
+                <h4 class="mt-2 text-xl font-semibold">{project.title}</h4>
+                <p class="mt-2 text-sm leading-relaxed text-[var(--white-icon)]">
+                  {project.summary}
+                </p>
+                <ul class="mt-3 flex flex-wrap gap-1.5">
+                  {project.tech.slice(0, 4).map((tech) => (
+                    <li class="rounded border border-[#ffffff12] px-2 py-1 text-[10px] uppercase tracking-wider text-[var(--white-icon)]">
+                      {tech}
+                    </li>
+                  ))}
+                </ul>
+                <div class="mt-auto flex flex-wrap items-center gap-3 pt-5">
+                  <a
+                    href={`${baseUrl}/work/${project.slug}`}
+                    class="text-xs uppercase tracking-wider text-[var(--sec)] transition hover:text-white"
+                  >
+                    Case study →
+                  </a>
+                  {project.codeUrl && (
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href={project.codeUrl}
+                      class="text-xs uppercase tracking-wider text-[var(--white-icon)] transition hover:text-white"
+                    >
+                      GitHub
+                    </a>
+                  )}
+                </div>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+
+    {
+      site.githubUrl && (
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href={site.githubUrl}
+          aria-label="More projects on GitHub"
+          class="w-full flex items-center justify-center gap-2 mt-8 text-[var(--white-icon)] hover:text-white transition duration-300 ease-in-out border border-[var(--white-icon-tr)] p-3 rounded-full bg-[#181920] hover:border-[var(--sec)]/40 hover:bg-[#1f212a]"
+        >
+          <span class="md:text-base text-sm">
+            Repositories, experiments and works in progress on
+          </span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            class="size-5"
+          >
+            <path d="M12.001 2C6.47598 2 2.00098 6.475 2.00098 12C2.00098 16.425 4.86348 20.1625 8.83848 21.4875C9.33848 21.575 9.52598 21.275 9.52598 21.0125C9.52598 20.775 9.51348 19.9875 9.51348 19.15C7.00098 19.6125 6.35098 18.5375 6.15098 17.975C6.03848 17.6875 5.55098 16.8 5.12598 16.5625C4.77598 16.375 4.27598 15.9125 5.11348 15.9C5.90098 15.8875 6.46348 16.625 6.65098 16.925C7.55098 18.4375 8.98848 18.0125 9.56348 17.75C9.65098 17.1 9.91348 16.6625 10.201 16.4125C7.97598 16.1625 5.65098 15.3 5.65098 11.475C5.65098 10.3875 6.03848 9.4875 6.67598 8.7875C6.57598 8.5375 6.22598 7.5125 6.77598 6.1375C6.77598 6.1375 7.61348 5.875 9.52598 7.1625C10.326 6.9375 11.176 6.825 12.026 6.825C12.876 6.825 13.726 6.9375 14.526 7.1625C16.4385 5.8625 17.276 6.1375 17.276 6.1375C17.826 7.5125 17.476 8.5375 17.376 8.7875C18.0135 9.4875 18.401 10.375 18.401 11.475C18.401 15.3125 16.0635 16.1625 13.8385 16.4125C14.201 16.725 14.5135 17.325 14.5135 18.2625C14.5135 19.6 14.501 20.675 14.501 21.0125C14.501 21.275 14.6885 21.5875 15.1885 21.4875C19.259 20.1133 21.9999 16.2963 22.001 12C22.001 6.475 17.526 2 12.001 2Z"
+            ></path>
+          </svg>
+        </a>
+      )
+    }
+  </div>
+</section>
+
+<script>
+  const buttons = Array.from(
+    document.querySelectorAll<HTMLButtonElement>("[data-filter]")
+  );
+  const cards = Array.from(
+    document.querySelectorAll<HTMLElement>("[data-cats]")
+  );
+  const groups = Array.from(document.querySelectorAll<HTMLElement>("[data-group]"));
+  const count = document.querySelector<HTMLElement>("[data-count]");
+
+  const isVisible = (card: HTMLElement) => !card.hidden;
+
+  const applyFilter = (filter: string) => {
+    buttons.forEach((button) => {
+      button.classList.toggle("is-active", button.dataset.filter === filter);
+    });
+
+    cards.forEach((card) => {
+      const cats = (card.dataset.cats ?? "").split(",");
+      card.hidden = filter !== "All" && !cats.includes(filter);
+    });
+
+    groups.forEach((group) => {
+      const groupCards = Array.from(
+        group.querySelectorAll<HTMLElement>("[data-cats]")
+      );
+      group.hidden = !groupCards.some(isVisible);
+    });
+
+    if (count) {
+      const shown = cards.filter(isVisible).length;
+      count.textContent = `${shown} project${shown === 1 ? "" : "s"}`;
+    }
+  };
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => applyFilter(button.dataset.filter ?? "All"));
+  });
+
+  document.querySelectorAll<HTMLElement>("[data-focus]").forEach((link) => {
+    link.addEventListener("click", () => {
+      const first = (link.dataset.focus ?? "").split(",")[0];
+      if (first) applyFilter(first);
+    });
+  });
+
+  applyFilter("All");
+</script>
+
+<style is:global>
+  .filter-btn.is-active {
+    border-color: var(--sec);
+    background-color: color-mix(in srgb, var(--sec) 14%, transparent);
+    color: var(--sec);
+  }
+
+  [hidden] {
+    display: none !important;
+  }
+</style>
