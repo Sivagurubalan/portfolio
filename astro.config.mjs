@@ -7,20 +7,20 @@ import react from "@astrojs/react";
 // https://astro.build/config
 export default defineConfig({
   integrations: [tailwind(), react()],
+  server: {
+    host: true,
+    port: 4321,
+    allowedHosts: true,
+  },
   vite: {
+    server: {
+      allowedHosts: true,
+    },
     resolve: {
       alias: {
         "@": "/src",
         "@components": "/src/components",
       },
     },
-  },
-  output: "static",
-  build: {
-    inlineStylesheets: "auto",
-  },
-  server: {
-    host: true,
-    port: 4321,
   },
 });
