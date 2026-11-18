@@ -20,14 +20,14 @@ const socialLinks = [
 const emailLink = `mailto:${site.email}`;
 ---
 
-<section class="text-[var(--white)] mt-10 md:mt-0" id="home">
-  <div class="max-w-5xl mx-auto pt-10 md:pt-28 pb-10">
+<section class="text-[var(--white)]" id="home">
+  <div class="max-w-5xl mx-auto pt-6 md:pt-24 pb-8 md:pb-12">
     <div
-      class="grid grid-cols-1 lg:grid-cols-[minmax(0,1.15fr)_minmax(320px,400px)] gap-10 lg:gap-14 items-center"
+      class="grid grid-cols-1 lg:grid-cols-[minmax(0,1.15fr)_minmax(320px,400px)] gap-8 lg:gap-14 items-center"
     >
-      <div class="space-y-6">
+      <div class="space-y-5 md:space-y-6">
         <p
-          class="flex items-center gap-3 text-[11px] md:text-xs uppercase tracking-[0.35em] text-[var(--sec)]"
+          class="flex items-center gap-2.5 text-[11px] md:text-xs uppercase tracking-[0.3em] text-[var(--sec)]"
         >
           <span class="size-1.5 rounded-full bg-[var(--sec)]"></span>
           {hero.eyebrow}
@@ -35,7 +35,7 @@ const emailLink = `mailto:${site.email}`;
         </p>
 
         <h1
-          class="text-[2.15rem] leading-[1.08] sm:text-5xl md:text-6xl font-medium text-pretty"
+          class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight leading-[1.15] text-pretty"
         >
           {hero.headlineStart}<span class="text-[var(--sec)] shiny-sec"
             >{hero.headlineAccent}</span
@@ -49,7 +49,7 @@ const emailLink = `mailto:${site.email}`;
         </p>
 
         <p
-          class="text-[11px] md:text-xs uppercase tracking-[0.3em] text-[var(--white-icon)]"
+          class="text-[11px] md:text-xs uppercase tracking-[0.25em] text-[var(--white-icon)]"
         >
           {
             hero.tagline.map((word, index) => (
@@ -61,10 +61,10 @@ const emailLink = `mailto:${site.email}`;
           }
         </p>
 
-        <div class="flex flex-wrap items-center gap-3 pt-2">
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
           <a
             href="#work"
-            class="inline-flex items-center gap-2 rounded-full bg-[var(--sec)] px-6 py-3 text-sm font-semibold text-[#0d0e12] transition duration-300 hover:brightness-110 shadow-[0_0_20px_rgba(168,85,247,0.35)] hover:shadow-[0_0_28px_rgba(168,85,247,0.55)]"
+            class="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--sec)] px-6 py-3 text-sm font-semibold text-[#0d0e12] transition duration-300 hover:brightness-110 shadow-[0_0_20px_rgba(168,85,247,0.35)] hover:shadow-[0_0_28px_rgba(168,85,247,0.55)]"
           >
             Explore projects
             <svg
@@ -79,13 +79,13 @@ const emailLink = `mailto:${site.email}`;
           </a>
           <a
             href="#contact"
-            class="inline-flex items-center gap-2 rounded-full border border-[var(--white-icon-tr)] bg-[#181920] px-6 py-3 text-sm text-[var(--white)] transition duration-300 hover:border-[var(--sec)] hover:text-white hover:shadow-[0_0_15px_rgba(168,85,247,0.2)]"
+            class="inline-flex items-center justify-center gap-2 rounded-full border border-[var(--white-icon-tr)] bg-[#181920] px-6 py-3 text-sm text-[var(--white)] transition duration-300 hover:border-[var(--sec)] hover:text-white hover:shadow-[0_0_15px_rgba(168,85,247,0.2)]"
           >
             Let's connect
           </a>
         </div>
 
-        <div class="flex items-center gap-2 pt-3">
+        <div class="flex items-center gap-2 pt-2">
           {
             socialLinks.map((link) => (
               <a
@@ -127,9 +127,9 @@ const emailLink = `mailto:${site.email}`;
       </div>
 
       <!-- Right Column: Pure Overlaid Portrait matched to background -->
-      <div class="relative flex justify-center lg:justify-end items-end select-none">
-        <div class="relative w-full max-w-[320px] sm:max-w-[360px] lg:max-w-[420px]">
-          <!-- Overlaid Transparent Cutout Portrait (Background matched to #0b0d10) -->
+      <div class="relative flex justify-center lg:justify-end items-end select-none mt-2 lg:mt-0">
+        <div class="relative w-full max-w-[280px] sm:max-w-[340px] lg:max-w-[420px] mx-auto">
+          <!-- Overlaid Transparent Cutout Portrait (Background matched to #121316) -->
           <img
             src="/images/sivagurubalan.webp?v=3"
             alt="R. Sivagurubalan — Robotics & Automation Engineer"

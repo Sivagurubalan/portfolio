@@ -50,7 +50,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       sameAs: [site.githubUrl, site.linkedinUrl].filter(Boolean),
     })} />
   </head>
-  <body class="bg-[--background] px-6 sm:px-12 md:pl-28 md:pr-12 lg:pl-32 lg:pr-16 text-[var(--white)] selection:bg-[var(--sec)] selection:text-[#0d0e12]">
+  <body class="bg-[--background] pt-14 md:pt-0 pb-28 md:pb-12 px-4 sm:px-8 md:pl-28 md:pr-12 lg:pl-32 lg:pr-16 text-[var(--white)] selection:bg-[var(--sec)] selection:text-[#0d0e12] overflow-x-hidden min-h-screen">
     <slot />
   </body>
 </html>
